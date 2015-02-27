@@ -28,8 +28,11 @@ def getNearbyPlaces(latitude,longitude):
      request = 'http://api.geonames.org/findNearbyPlaceNameJSON?lat='+latitude +'&lng='+longitude+'&radius=300&maxRow=15&cities=cities15000&username=' + loadGeoUsername()
      response = urllib.request.urlopen(request)
      data = json.loads(response.read().decode("utf-8"))
-     logger.error('test')
-     logger.error(data["geonames"][0]["toponymName"])
+
+     for num in range(0,len(data["geonames"])):
+          logger.error(data["geonames"][num]["toponymName"])
+     #logger.error(data["geonames"][0]["toponymName"])
+
 
 
 
