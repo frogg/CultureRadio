@@ -18,3 +18,7 @@ def getArtistList(request,latitude=1,longitude=1, format=None):
      serializer = ArtistSerializer(artists, many = True)
      return Response(serializer.data)
 
+#get nearbyPlaces using the geonames api
+def getNearbyPlaces(latitude,longitude):
+    # http://api.geonames.org/findNearbyPlaceName?lat=48.639291&lng=9.135565&radius=300&maxRow=50&cities=cities15000&username=loadFromGitIgnore
+
