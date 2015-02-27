@@ -24,7 +24,11 @@ def getSpotifyUris(request,latitude=1,longitude=1, format=None):
      serializer = ArtistSerializer(artists, many = True)
 
      #return Response(serializer.data)
-     return Response(getNearbyPlaces(latitude,longitude))
+     dic = getNearbyPlaces(latitude,longitude)
+     logger.error(type(dic))
+     if dic["continueSearching"] != True :
+          return Response(dic)
+     return Response('Noting found yet')
 
 #get Spotify Ids
 def getSpotifyId(artist):
@@ -72,8 +76,9 @@ def getNearbyPlaces(latitude,longitude):
                return {'continueSearching':False, 'result':dic["result"]}
           else:
                logger.error(data["geonames"][num]["toponymName"])
-               return {'continueSearching':True, 'result':""}
+
      #logger.error(data["geonames"][0]["toponymName"])
+     return {'continueSearching':True, 'result':""}
 
 
 
