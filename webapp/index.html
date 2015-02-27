@@ -1,7 +1,29 @@
+<!DOCTYPE html>
 <html>
+<head>
+  <title>Culture Radio</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+	<style type="text/css">
+	  html { height: 100%; }
+	  body { height: 100%; margin: 0; padding: 0; }
+	  #map-canvas { height: 80%; }
+	</style>
+</head>
+
 <body>
+Will update every 15 seconds
 <div id="demo">Gelocation test!</div>
+<div id="map-canvas"></div>
+
 <script>
+
+	var map = null;
+	var marker = null;
+	var positionLatLng = null;
+
 	var x = document.getElementById("demo");
 	function getLocation() {
 	    if (navigator.geolocation) {
@@ -10,12 +32,51 @@
 	        x.innerHTML = "Geolocation is not supported by this browser.";
 	    }
 	}
+
 	function showPosition(position) {
 	    x.innerHTML = "Latitude: " + position.coords.latitude + 
-	    "<br>Longitude: " + position.coords.longitude; 
+	    "<br>Longitude: " + position.coords.longitude + 
+	    "<br>Time: " + new Date();
+
+
+	    positionLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+		centerMap();
+
+	    setTimeout(getLocation, 15 * 1000);
+	}
+
+	function centerMap() {
+		var position = positionLatLng;
+		if (!map) {
+			var mapOptions = {
+				center: position,
+				zoom: 13
+        	};
+
+			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			marker = new google.maps.Marker({
+		    position: map.getCenter(),
+		    icon: {
+		      path: google.maps.SymbolPath.CIRCLE,
+		      scale: 10
+		    },
+		    draggable: true,
+		    map: map
+		  });	
+		}
+
+		marker.setPosition(position);
+		map.setCenter(position);
 	}
 
 	getLocation();
+
+	$( window ).resize(function() {
+		if (positionLatLng) {
+			setTimeout(centerMap, 100);
+		}
+	});
 </script>
 
 </body>
