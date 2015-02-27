@@ -25,7 +25,7 @@
     [userDefaults synchronize];
     MainViewController *viewController = [[MainViewController alloc] init];
     UINavigationController *navigationController= [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationController.navigationBar.barTintColor=[UIColor colorWithRed:8.0/255.0 green:106.0/255.0 blue:37.0/255.0 alpha:1];
+    navigationController.navigationBar.barTintColor=[UIColor blackColor];
     [navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     self.window.rootViewController = navigationController;
@@ -80,6 +80,7 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
    /* self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
@@ -92,7 +93,7 @@
     
     self.window.rootViewController = navigationController;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     
     return YES;*/
     
