@@ -11,11 +11,11 @@
 #import <Spotify/Spotify.h>
 @import AVFoundation;
 @import MediaPlayer;
+@import CoreLocation;
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<SPTAudioStreamingPlaybackDelegate,AVAudioPlayerDelegate,CLLocationManagerDelegate>
 
 
 -(void)handleNewSession:(SPTSession *)session;
 
 @end
-
