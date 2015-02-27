@@ -10,6 +10,6 @@ from rest_framework.response import Response
 
 # Create your views here.
 @api_view(['GET'])
-def test(request, format=None):
+def getArtistList(request,latitude=1,longitude=1, format=None):
     content = {'artist': 'DJ Bobo'}
     return Response(content)
