@@ -25,6 +25,13 @@ def getArtistList(request,latitude=1,longitude=1, format=None):
      getNearbyPlaces(latitude,longitude)
      return Response(serializer.data)
 
+#get Spotify Ids
+def getSpotifyId():
+     url = 'https://api.spotify.com/v1/search?query=die+fantastischen+vier&type=track'
+     r = requests.get(url);
+     #Problem if user asks again => gets the same uri
+     logger.error(r.json()["tracks"]["items"][0]["uri"])
+
 #get artists for city
 def getArtistForCity(city):
      city="Stuttgart"
@@ -35,9 +42,7 @@ def getArtistForCity(city):
      for node in dom2.getElementsByTagName('artist'):  # visit every node <bar />
           #get Artist Names
           logger.error(node.firstChild.firstChild.nodeValue)
-
-
-
+     getSpotifyId()
 
 
 #get nearbyPlaces using the geonames api
