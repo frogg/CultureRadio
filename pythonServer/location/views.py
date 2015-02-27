@@ -58,7 +58,7 @@ def getArtistForCity(city):
           #logger.error(node.firstChild.firstChild.nodeValue)
           if dic["continueSearching"] !=True :
                #stop searching and return result
-               return {'continueSearching':False, 'result':dic["result"]}
+               return {'continueSearching':False, 'result':dic["result"],'city':city}
      #found nothing till now => continue searching
      return {'continueSearching':True, 'result':""}
 
@@ -73,7 +73,7 @@ def getNearbyPlaces(latitude,longitude):
           dic = getArtistForCity(data["geonames"][num]["toponymName"])
           if dic["continueSearching"] !=True :
                #stop searching and return result
-               return {'continueSearching':False, 'result':dic["result"]}
+               return {'continueSearching':False, 'result':dic["result"],'city':dic["city"]}
           else:
                logger.error(data["geonames"][num]["toponymName"])
 
