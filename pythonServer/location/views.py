@@ -19,30 +19,44 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 @api_view(['GET'])
-def getArtistList(request,latitude=1,longitude=1, format=None):
+def getSpotifyUris(request,latitude=1,longitude=1, format=None):
      artists = Artist.objects.all()
      serializer = ArtistSerializer(artists, many = True)
-     getNearbyPlaces(latitude,longitude)
-     return Response(serializer.data)
+
+     #return Response(serializer.data)
+     return Response(getNearbyPlaces(latitude,longitude))
 
 #get Spotify Ids
-def getSpotifyId():
-     url = 'https://api.spotify.com/v1/search?query=die+fantastischen+vier&type=track'
+def getSpotifyId(artist):
+     url = 'https://api.spotify.com/v1/search?query='+ artist +'&type=track'
      r = requests.get(url);
      #Problem if user asks again => gets the same uri
-     logger.error(r.json()["tracks"]["items"][0]["uri"])
+     try:
+          #logger.error(r.json()["tracks"]["items"][0]["uri"])
+          return {'continueSearching':False, 'result':r.json()["tracks"]["items"][0]["uri"]}
+     except:
+          return {'continueSearching':True, 'result':""}
+
+
 
 #get artists for city
 def getArtistForCity(city):
-     city="Stuttgart"
+     #city="San Francisco" #dummyData
+     #improvement idea => ask for multiple cities at one time with or
      url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
      r = requests.get(url)
-     dom2 = parseString(r.text)
+     dom = parseString(r.text)
      #logger.error(dom2.toxml())
-     for node in dom2.getElementsByTagName('artist'):  # visit every node <bar />
-          #get Artist Names
-          logger.error(node.firstChild.firstChild.nodeValue)
-     getSpotifyId()
+     #go through the artists
+     for node in dom.getElementsByTagName('artist'):  # visit every node with this tag
+          #node.firstChild.firstChild.nodeValue is the artists name
+          dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
+          #logger.error(node.firstChild.firstChild.nodeValue)
+          if dic["continueSearching"] !=True :
+               #stop searching and return result
+               return {'continueSearching':False, 'result':dic["result"]}
+     #found nothing till now => continue searching
+     return {'continueSearching':True, 'result':""}
 
 
 #get nearbyPlaces using the geonames api
@@ -52,9 +66,15 @@ def getNearbyPlaces(latitude,longitude):
      data = json.loads(response.read().decode("utf-8"))
 
      for num in range(0,len(data["geonames"])):
-          logger.error(data["geonames"][num]["toponymName"])
+          dic = getArtistForCity(data["geonames"][num]["toponymName"])
+          if dic["continueSearching"] !=True :
+               #stop searching and return result
+               return {'continueSearching':False, 'result':dic["result"]}
+          else:
+               logger.error(data["geonames"][num]["toponymName"])
+               return {'continueSearching':True, 'result':""}
      #logger.error(data["geonames"][0]["toponymName"])
-     getArtistForCity(data["geonames"][0]["toponymName"])
+
 
 
 def loadGeoUsername():
