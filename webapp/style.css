@@ -11,10 +11,74 @@ body {
 	padding: 0;
 }
 
+.clearfix {
+	clear: both;
+	display: none;
+}
+
 #map-canvas {
-	height: 80%;
+	width: 768px;
+	height: 384px;
 }
 
 .audio-player {
 	margin-bottom: 1em;
+}
+
+body[data-location-state=following] .resume-following {
+	display: none;
+}
+
+body:not([data-location-state=following]) .while-following {
+	display: none;
+}
+
+.artist-lookup form {
+	display: inline-block;
+}
+
+.position-status {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+	
+	font-size: 1.5em;
+}
+
+
+.floats {
+	position: relative;
+}
+
+.floats > * {
+	float: left;
+
+	height: 384px;
+	width: 384px;
+
+	margin: 4px;
+	padding: 2px;
+
+	
+	background: black;
+
+}
+
+.artist-info, .track-info {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 50%;
+}
+
+.meta-info {
+	text-align: center;
+	text-shadow: 5px 1px 28px rgba(0, 0, 0, 1);
+
+	font-size: 1.6em;
+
+	background: rgba(0,0,0,0.5);
+	padding: 6px;
+}
+
+.playlist {
+	overflow: auto;
 }
