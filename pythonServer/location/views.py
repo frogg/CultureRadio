@@ -9,6 +9,8 @@ from artist.serializers import ArtistSerializer
 import urllib.request
 import logging
 import json
+import requests
+from xml.dom.minidom import parseString
 
 
 logger = logging.getLogger(__name__)
@@ -23,6 +25,21 @@ def getArtistList(request,latitude=1,longitude=1, format=None):
      getNearbyPlaces(latitude,longitude)
      return Response(serializer.data)
 
+#get artists for city
+def getArtistForCity(city):
+     city="Stuttgart"
+     url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
+     r = requests.get(url)
+     dom2 = parseString(r.text)
+     #logger.error(dom2.toxml())
+     for node in dom2.getElementsByTagName('artist'):  # visit every node <bar />
+          #get Artist Names
+          logger.error(node.firstChild.firstChild.nodeValue)
+
+
+
+
+
 #get nearbyPlaces using the geonames api
 def getNearbyPlaces(latitude,longitude):
      request = 'http://api.geonames.org/findNearbyPlaceNameJSON?lat='+latitude +'&lng='+longitude+'&radius=300&maxRow=15&cities=cities15000&username=' + loadGeoUsername()
@@ -32,9 +49,7 @@ def getNearbyPlaces(latitude,longitude):
      for num in range(0,len(data["geonames"])):
           logger.error(data["geonames"][num]["toponymName"])
      #logger.error(data["geonames"][0]["toponymName"])
-
-
-
+     getArtistForCity(data["geonames"][0]["toponymName"])
 
 
 def loadGeoUsername():
