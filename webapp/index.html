@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Culture Radio</title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+
+	<body>
+		<div class="audio-player">
+			<div class="current-song">Currenly playing <a href="http://longplayer.org/">longplayer</a> (dattazzz gimeeh json)</div>
+			<audio id="music" class="voice-mon" src="http://stream.spc.org:8008/longplayer" controls autoplay="autoplay">
+				HTML 5 AUDIO IS REQUIRED
+			</audio>
+		</div>
+
+		Will update every 15 seconds
+		<div id="demo">Gelocation test!</div>
+		<div id="map-canvas"></div>
+
+		<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
