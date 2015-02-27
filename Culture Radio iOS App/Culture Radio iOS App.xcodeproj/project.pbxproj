@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		511B5DBE1AA0952E00F53CBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5DBD1AA0952E00F53CBF /* main.m */; };
+		511B5DC11AA0952E00F53CBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5DC01AA0952E00F53CBF /* AppDelegate.m */; };
+		511B5DC41AA0952E00F53CBF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5DC31AA0952E00F53CBF /* MainViewController.m */; };
+		511B5DC91AA0952E00F53CBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DC81AA0952E00F53CBF /* Images.xcassets */; };
+		511B5DCC1AA0952E00F53CBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DCA1AA0952E00F53CBF /* LaunchScreen.xib */; };
+		511B5DD81AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5DD71AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m */; };
+		511B5DE21AA0978F00F53CBF /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE11AA0978F00F53CBF /* Spotify.framework */; };
+		511B5DE51AA09F3500F53CBF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE41AA09F3500F53CBF /* AVFoundation.framework */; };
+		511B5DE71AA09F3C00F53CBF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		511B5DD21AA0952E00F53CBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 511B5DB01AA0952E00F53CBF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 511B5DB71AA0952E00F53CBF;
+			remoteInfo = "Culture Radio iOS App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		511B5DB81AA0952E00F53CBF /* Culture Radio iOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Culture Radio iOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		511B5DBC1AA0952E00F53CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		511B5DBD1AA0952E00F53CBF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		511B5DBF1AA0952E00F53CBF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		511B5DC01AA0952E00F53CBF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		511B5DC21AA0952E00F53CBF /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		511B5DC31AA0952E00F53CBF /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		511B5DC81AA0952E00F53CBF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		511B5DCB1AA0952E00F53CBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		511B5DD11AA0952E00F53CBF /* Culture Radio iOS AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Culture Radio iOS AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		511B5DD61AA0952E00F53CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		511B5DD71AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Culture_Radio_iOS_AppTests.m; sourceTree = "<group>"; };
+		511B5DE11AA0978F00F53CBF /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spotify.framework; path = "Culture Radio iOS App/Spotify.framework"; sourceTree = "<group>"; };
+		511B5DE31AA097D300F53CBF /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		511B5DE41AA09F3500F53CBF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		511B5DB51AA0952E00F53CBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				511B5DE71AA09F3C00F53CBF /* MediaPlayer.framework in Frameworks */,
+				511B5DE51AA09F3500F53CBF /* AVFoundation.framework in Frameworks */,
+				511B5DE21AA0978F00F53CBF /* Spotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		511B5DCE1AA0952E00F53CBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		511B5DAF1AA0952E00F53CBF = {
+			isa = PBXGroup;
+			children = (
+				511B5DE11AA0978F00F53CBF /* Spotify.framework */,
+				511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */,
+				511B5DE41AA09F3500F53CBF /* AVFoundation.framework */,
+				511B5DBA1AA0952E00F53CBF /* Culture Radio iOS App */,
+				511B5DD41AA0952E00F53CBF /* Culture Radio iOS AppTests */,
+				511B5DB91AA0952E00F53CBF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		511B5DB91AA0952E00F53CBF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DB81AA0952E00F53CBF /* Culture Radio iOS App.app */,
+				511B5DD11AA0952E00F53CBF /* Culture Radio iOS AppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		511B5DBA1AA0952E00F53CBF /* Culture Radio iOS App */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DE31AA097D300F53CBF /* Config.h */,
+				511B5DBF1AA0952E00F53CBF /* AppDelegate.h */,
+				511B5DC01AA0952E00F53CBF /* AppDelegate.m */,
+				511B5DC21AA0952E00F53CBF /* MainViewController.h */,
+				511B5DC31AA0952E00F53CBF /* MainViewController.m */,
+				511B5DC81AA0952E00F53CBF /* Images.xcassets */,
+				511B5DCA1AA0952E00F53CBF /* LaunchScreen.xib */,
+				511B5DBB1AA0952E00F53CBF /* Supporting Files */,
+			);
+			path = "Culture Radio iOS App";
+			sourceTree = "<group>";
+		};
+		511B5DBB1AA0952E00F53CBF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DBC1AA0952E00F53CBF /* Info.plist */,
+				511B5DBD1AA0952E00F53CBF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		511B5DD41AA0952E00F53CBF /* Culture Radio iOS AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DD71AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m */,
+				511B5DD51AA0952E00F53CBF /* Supporting Files */,
+			);
+			path = "Culture Radio iOS AppTests";
+			sourceTree = "<group>";
+		};
+		511B5DD51AA0952E00F53CBF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DD61AA0952E00F53CBF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		511B5DB71AA0952E00F53CBF /* Culture Radio iOS App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 511B5DDB1AA0952E00F53CBF /* Build configuration list for PBXNativeTarget "Culture Radio iOS App" */;
+			buildPhases = (
+				511B5DB41AA0952E00F53CBF /* Sources */,
+				511B5DB51AA0952E00F53CBF /* Frameworks */,
+				511B5DB61AA0952E00F53CBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Culture Radio iOS App";
+			productName = "Culture Radio iOS App";
+			productReference = 511B5DB81AA0952E00F53CBF /* Culture Radio iOS App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		511B5DD01AA0952E00F53CBF /* Culture Radio iOS AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 511B5DDE1AA0952E00F53CBF /* Build configuration list for PBXNativeTarget "Culture Radio iOS AppTests" */;
+			buildPhases = (
+				511B5DCD1AA0952E00F53CBF /* Sources */,
+				511B5DCE1AA0952E00F53CBF /* Frameworks */,
+				511B5DCF1AA0952E00F53CBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				511B5DD31AA0952E00F53CBF /* PBXTargetDependency */,
+			);
+			name = "Culture Radio iOS AppTests";
+			productName = "Culture Radio iOS AppTests";
+			productReference = 511B5DD11AA0952E00F53CBF /* Culture Radio iOS AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		511B5DB01AA0952E00F53CBF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Frederik Riedel";
+				TargetAttributes = {
+					511B5DB71AA0952E00F53CBF = {
+						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					511B5DD01AA0952E00F53CBF = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 511B5DB71AA0952E00F53CBF;
+					};
+				};
+			};
+			buildConfigurationList = 511B5DB31AA0952E00F53CBF /* Build configuration list for PBXProject "Culture Radio iOS App" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 511B5DAF1AA0952E00F53CBF;
+			productRefGroup = 511B5DB91AA0952E00F53CBF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				511B5DB71AA0952E00F53CBF /* Culture Radio iOS App */,
+				511B5DD01AA0952E00F53CBF /* Culture Radio iOS AppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		511B5DB61AA0952E00F53CBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				511B5DCC1AA0952E00F53CBF /* LaunchScreen.xib in Resources */,
+				511B5DC91AA0952E00F53CBF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		511B5DCF1AA0952E00F53CBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		511B5DB41AA0952E00F53CBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				511B5DC41AA0952E00F53CBF /* MainViewController.m in Sources */,
+				511B5DC11AA0952E00F53CBF /* AppDelegate.m in Sources */,
+				511B5DBE1AA0952E00F53CBF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		511B5DCD1AA0952E00F53CBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				511B5DD81AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		511B5DD31AA0952E00F53CBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 511B5DB71AA0952E00F53CBF /* Culture Radio iOS App */;
+			targetProxy = 511B5DD21AA0952E00F53CBF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		511B5DCA1AA0952E00F53CBF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				511B5DCB1AA0952E00F53CBF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		511B5DD91AA0952E00F53CBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		511B5DDA1AA0952E00F53CBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		511B5DDC1AA0952E00F53CBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Culture",
+					Radio,
+					iOS,
+					App,
+				);
+				INFOPLIST_FILE = "Culture Radio iOS App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		511B5DDD1AA0952E00F53CBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Culture",
+					Radio,
+					iOS,
+					App,
+				);
+				INFOPLIST_FILE = "Culture Radio iOS App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		511B5DDF1AA0952E00F53CBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Culture Radio iOS AppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culture Radio iOS App.app/Culture Radio iOS App";
+			};
+			name = Debug;
+		};
+		511B5DE01AA0952E00F53CBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Culture Radio iOS AppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culture Radio iOS App.app/Culture Radio iOS App";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		511B5DB31AA0952E00F53CBF /* Build configuration list for PBXProject "Culture Radio iOS App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				511B5DD91AA0952E00F53CBF /* Debug */,
+				511B5DDA1AA0952E00F53CBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		511B5DDB1AA0952E00F53CBF /* Build configuration list for PBXNativeTarget "Culture Radio iOS App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				511B5DDC1AA0952E00F53CBF /* Debug */,
+				511B5DDD1AA0952E00F53CBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		511B5DDE1AA0952E00F53CBF /* Build configuration list for PBXNativeTarget "Culture Radio iOS AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				511B5DDF1AA0952E00F53CBF /* Debug */,
+				511B5DE01AA0952E00F53CBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 511B5DB01AA0952E00F53CBF /* Project object */;
+}
