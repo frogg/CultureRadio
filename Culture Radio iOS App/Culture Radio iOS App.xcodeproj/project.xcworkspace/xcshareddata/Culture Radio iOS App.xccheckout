@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F53836BC-25C8-426A-9F63-70E86CF38A3B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Culture Radio iOS App</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5E93E940A40E34D5015536A36411DDF51EAE8CE1</key>
+		<string>https://github.com/quappi/CultureRadio.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Culture Radio iOS App/Culture Radio iOS App.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5E93E940A40E34D5015536A36411DDF51EAE8CE1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/quappi/CultureRadio.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5E93E940A40E34D5015536A36411DDF51EAE8CE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5E93E940A40E34D5015536A36411DDF51EAE8CE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CultureRadio</string>
+		</dict>
+	</array>
+</dict>
+</plist>
