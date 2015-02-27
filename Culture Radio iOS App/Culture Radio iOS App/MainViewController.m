@@ -4,7 +4,7 @@
 //
 //  Created by Frederik Riedel on 27.02.15.
 //  Copyright (c) 2015 Frederik Riedel. All rights reserved.
-//
+//  some icons by http://icons8.com/web-app/402/Pause
 
 #import "MainViewController.h"
 
@@ -15,19 +15,44 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) UIImageView *coverView;
 @property (nonatomic,strong) UIButton *playPauseButton;
+@property (nonatomic,strong) UIButton *nextButton;
+@property (nonatomic,strong) UIButton *prevButton;
+@property (nonatomic,strong) UILabel *trackInformationLabel;
+@property (nonatomic,strong) UIView *solidBackgroundForControls;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UIButton *darkShadeMapView;
+
 
 
 
 @end
 
 @implementation MainViewController
-@synthesize locationManager,playPauseButton;
+@synthesize locationManager,playPauseButton,nextButton,trackInformationLabel,mapView,darkShadeMapView,solidBackgroundForControls,prevButton;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor blackColor];
     self.title=@"Cultural Radio";
     
-    self.coverView=[[UIImageView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.width)];
+    
+    mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+//    mapView.showsUserLocation = YES;
+    mapView.mapType = MKMapTypeSatellite;
+    mapView.userInteractionEnabled=NO;
+    mapView.delegate=self;
+    mapView.showsUserLocation=YES;
+    //mapView.region = MKCoordinateRegionMake(mapView.centerCoordinate, MKCoordinateSpanMake(10, 10));
+    [self.view addSubview:mapView];
+
+    darkShadeMapView = [UIButton buttonWithType:UIButtonTypeCustom];
+    darkShadeMapView.frame=mapView.frame;
+    darkShadeMapView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    [darkShadeMapView addTarget:self action:@selector(showMap) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:darkShadeMapView];
+    
+    
+    self.coverView=[[UIImageView alloc] initWithFrame:CGRectMake(30, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width-60, self.view.frame.size.width)];
+    self.coverView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.coverView];
     
     
@@ -42,12 +67,48 @@
     [locationManager startUpdatingLocation];
     
     
-    playPauseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [playPauseButton setTitle:@"▶︎" forState:UIControlStateNormal];
-    playPauseButton.frame=CGRectMake(0, self.coverView.frame.origin.y+self.coverView.frame.size.height, self.view.frame.size.width, 100);
-    [playPauseButton addTarget:self action:@selector(playPauseButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:playPauseButton];
+    solidBackgroundForControls = [[UIView alloc] initWithFrame:CGRectMake(0, self.coverView.frame.origin.y+self.coverView.frame.size.height, self.view.frame.size.width, 70)];
+    [self.view addSubview:solidBackgroundForControls];
     
+    playPauseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //[playPauseButton setTitle:@"▶︎" forState:UIControlStateNormal];
+    [playPauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+    
+    playPauseButton.tintColor=[UIColor lightGrayColor];
+    [playPauseButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    playPauseButton.frame=CGRectMake(self.view.frame.size.width/2 - 35, 0, 70, 70);
+    [playPauseButton addTarget:self action:@selector(playPauseButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [solidBackgroundForControls addSubview:playPauseButton];
+    
+    
+    
+    nextButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [nextButton setImage:[UIImage imageNamed:@"next.png"] forState:UIControlStateNormal];
+    nextButton.tintColor=[UIColor lightGrayColor];
+    nextButton.frame=CGRectMake(self.view.frame.size.width/2 + 35, 0, 70, 70);
+    [nextButton addTarget:self action:@selector(playNextTrack) forControlEvents:UIControlEventTouchUpInside];
+    [solidBackgroundForControls addSubview:nextButton];
+    
+    prevButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [prevButton setImage:[UIImage imageNamed:@"prev.png"] forState:UIControlStateNormal];
+    prevButton.tintColor=[UIColor lightGrayColor];
+    prevButton.frame=CGRectMake(self.view.frame.size.width/2 - 35 - 70, 0, 70, 70);
+    [prevButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+    [solidBackgroundForControls addSubview:prevButton];
+    
+    
+
+    [self.view bringSubviewToFront:self.coverView];
+    
+    
+    trackInformationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, solidBackgroundForControls.frame.origin.y+solidBackgroundForControls.frame.size.height, self.view.frame.size.width, 50)];
+    trackInformationLabel.text=@"";
+    trackInformationLabel.numberOfLines=-1;
+    trackInformationLabel.font=[UIFont systemFontOfSize:20];
+    trackInformationLabel.textAlignment=NSTextAlignmentCenter;
+    trackInformationLabel.textColor=[UIColor whiteColor];
+    [self.view addSubview:trackInformationLabel];
     
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -56,13 +117,66 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)mapView:(MKMapView *)map didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    [map setCenterCoordinate:map.userLocation.location.coordinate animated:YES];
+}
+
+-(void) showMap {
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationCurveLinear
+                     animations:^{
+                         darkShadeMapView.alpha=0;
+                         //self.coverView.alpha=0;
+                         self.trackInformationLabel.alpha=0;
+                         self.coverView.frame=CGRectMake(0, self.view.frame.size.height-70, 70, 70);
+          //               self.playPauseButton.alpha=0;
+        //                 nextButton.alpha=0;
+                         solidBackgroundForControls.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+                         solidBackgroundForControls.frame=CGRectMake(0, self.view.frame.size.height-70, self.view.frame.size.width, 70);
+                         
+                     }
+     
+                     completion:^(BOOL finished) {
+                         mapView.mapType = MKMapTypeHybrid;
+                         mapView.userInteractionEnabled=YES;
+                         UIBarButtonItem *backToMusic = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backToMusic)];
+                         self.navigationItem.rightBarButtonItem=backToMusic;
+                     }];
+}
+
+-(void) backToMusic {
+    [UIView animateWithDuration:0.5
+                          delay:0
+                        options:UIViewAnimationCurveLinear
+                     animations:^{
+                         darkShadeMapView.alpha=1;
+                         //self.coverView.alpha=1;
+                         self.trackInformationLabel.alpha=1;
+                         self.coverView.frame=CGRectMake(30, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width-60, self.view.frame.size.width);
+//                         self.playPauseButton.alpha=1;
+//                         nextButton.alpha=1;
+                         solidBackgroundForControls.backgroundColor=[UIColor clearColor];
+                         solidBackgroundForControls.frame=CGRectMake(0, self.coverView.frame.origin.y+self.coverView.frame.size.height, self.view.frame.size.width, 70);
+                         
+                         self.navigationItem.rightBarButtonItem=nil;
+                         
+                     }
+     
+                     completion:^(BOOL finished) {
+                         mapView.mapType = MKMapTypeSatellite;
+                         mapView.userInteractionEnabled=NO;
+                     }];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
-    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    //NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+    //NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 }
 
 -(void) play {
-    [SPTRequest requestItemAtURI:[NSURL URLWithString:@"spotify:track:7Fng0zvM0XLoMHyINeu8Kj"]
+    [SPTRequest requestItemAtURI:[NSURL URLWithString:@"spotify:album:7LGeYkQRzJJbk0QUkczuCD"]
                      withSession:self.session
                         callback:^(NSError *error, id object) {
                             
@@ -109,17 +223,23 @@
 
 - (void) audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangeToTrack:(NSDictionary *)trackMetadata {
     NSLog(@"%@",[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataTrackName]);
+    trackInformationLabel.text=[NSString stringWithFormat:@"%@ \nby %@",[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataTrackName],[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataArtistName]];
     [self updateCoverView];
-    [playPauseButton setTitle:@"||" forState:UIControlStateNormal];
+    
+    [playPauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+    
+    
+
+    
 }
 
 -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangePlaybackStatus:(BOOL)isPlaying {
     if(isPlaying) {
         NSLog(@"playing");
-        [playPauseButton setTitle:@"||" forState:UIControlStateNormal];
+        [playPauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
     } else {
         NSLog(@"Not playing");
-        [playPauseButton setTitle:@"▶︎" forState:UIControlStateNormal];
+            [playPauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -145,6 +265,7 @@
                    ^{
                        
                        NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.137.192:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
+                                          NSLog(@"Load New Data Ffrom Server");
                        NSData * data=[NSData dataWithContentsOfURL:url];
                        
                        
@@ -156,7 +277,6 @@
                                           } else {
                                               NSLog(@"loading data failed 😭");
                                           }
-                                          
                                       });
                    });
     
@@ -185,8 +305,20 @@
                               image = [UIImage imageWithData:imageData];
                           }
                           
+                          
                           // …and back to the main queue to display the image.
                           dispatch_async(dispatch_get_main_queue(), ^{
+                              
+                              NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
+                              
+                              
+                              MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: image];
+                              
+                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataTrackName] forKey:MPMediaItemPropertyTitle];
+                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataArtistName] forKey:MPMediaItemPropertyArtist];
+                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataAlbumName] forKey:MPMediaItemPropertyAlbumTitle];
+                              [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+                              [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
                               
                               self.coverView.image = image;
                               if (image == nil) {

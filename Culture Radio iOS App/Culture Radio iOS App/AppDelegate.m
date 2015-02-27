@@ -25,7 +25,8 @@
     [userDefaults synchronize];
     MainViewController *viewController = [[MainViewController alloc] init];
     UINavigationController *navigationController= [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationController.navigationBar.barTintColor=[UIColor blackColor];
+    //navigationController.navigationBar.barTintColor=[UIColor blackColor];
+    navigationController.navigationBar.barStyle=UIBarStyleBlackTranslucent;
     [navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     self.window.rootViewController = navigationController;

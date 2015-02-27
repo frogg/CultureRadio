@@ -12,8 +12,9 @@
 @import AVFoundation;
 @import MediaPlayer;
 @import CoreLocation;
+@import MapKit;
 
-@interface MainViewController : UIViewController<SPTAudioStreamingPlaybackDelegate,AVAudioPlayerDelegate,CLLocationManagerDelegate>
+@interface MainViewController : UIViewController<SPTAudioStreamingPlaybackDelegate,AVAudioPlayerDelegate,CLLocationManagerDelegate,MKMapViewDelegate>
 
 
 -(void)handleNewSession:(SPTSession *)session;
