@@ -8,17 +8,61 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
-	<body>
-		<div class="audio-player">
-			<div class="current-song">Currenly playing <a href="http://longplayer.org/">longplayer</a> (dattazzz gimeeh json)</div>
-			<audio id="music" class="voice-mon" src="http://stream.spc.org:8008/longplayer" controls autoplay="autoplay">
-				HTML 5 AUDIO IS REQUIRED
-			</audio>
-		</div>
+	<body data-location-state="following">
+		<div class="floats">
+			
+			<div class="controls">		
+				<div class="audio-player">
+					<div class="currently-playing">Currenly playing <a href="http://longplayer.org/">longplayer</a> (dattazzz gimeeh json)</div>
+					<audio id="music" class="voice-mon" src="http://stream.spc.org:8008/longplayer" controls autoplay="autoplay">
+						HTML 5 AUDIO IS REQUIRED
+					</audio>
+				</div>
 
-		Will update every 15 seconds
-		<div id="demo">Gelocation test!</div>
-		<div id="map-canvas"></div>
+				<div class="artist-lookup">
+					<form>
+						<input name="artist-list" autofocus type="text" value=""/>
+						<button>Lookup</button>
+					</form>
+					<button class="skip">Skip</button>
+				</div>
+			
+				<div class="position-status">
+					<button class="resume-following">
+						Resume auto geolocation
+					</button>
+					<span class="while-following">
+						Status: Will update every 15 seconds. Move the marker to switch to manual mode.
+					</span>
+				</div>
+				<div id="demo">Gelocation test!</div>
+			</div>
+		
+			<div id="map-canvas"></div>
+
+			<div class="playlist">
+				Related Tracks
+				<hr/>
+				<ol class="playlist-entries">
+					
+				</ol>
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="artist-info">
+				<div class="meta-info">
+					<span class="artist-name"></span>
+				</div>
+			</div>
+
+			<div class="track-info">
+				<div class="meta-info">
+					<span class="album-info"></span>
+					<span class="track-name"></span>
+				</div>
+			</div>
+		</div>
 
 		<script type="text/javascript" src="app.js"></script>
 	</body>
