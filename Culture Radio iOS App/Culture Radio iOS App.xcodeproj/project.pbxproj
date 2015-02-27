@@ -16,6 +16,18 @@
 		511B5DE21AA0978F00F53CBF /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE11AA0978F00F53CBF /* Spotify.framework */; };
 		511B5DE51AA09F3500F53CBF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE41AA09F3500F53CBF /* AVFoundation.framework */; };
 		511B5DE71AA09F3C00F53CBF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */; };
+		511B5DF01AA0D90800F53CBF /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DEE1AA0D90800F53CBF /* pause.png */; };
+		511B5DF11AA0D90800F53CBF /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DEF1AA0D90800F53CBF /* play.png */; };
+		511B5DF41AA0DAF200F53CBF /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DF21AA0DAF200F53CBF /* pause@2x.png */; };
+		511B5DF51AA0DAF200F53CBF /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DF31AA0DAF200F53CBF /* play@2x.png */; };
+		511B5DF81AA0E37500F53CBF /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DF61AA0E37500F53CBF /* next.png */; };
+		511B5DF91AA0E37500F53CBF /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DF71AA0E37500F53CBF /* next@2x.png */; };
+		511B5DFC1AA0FAFD00F53CBF /* prev.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DFA1AA0FAFD00F53CBF /* prev.png */; };
+		511B5DFD1AA0FAFD00F53CBF /* prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DFB1AA0FAFD00F53CBF /* prev@2x.png */; };
+		511B5DFF1AA107B100F53CBF /* Stuttgart.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DFE1AA107B100F53CBF /* Stuttgart.gpx */; };
+		511B5E021AA1085E00F53CBF /* Bern.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E011AA1085E00F53CBF /* Bern.gpx */; };
+		511B5E041AA108CC00F53CBF /* Zürich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E031AA108CC00F53CBF /* Zürich.gpx */; };
+		511B5E061AA1090500F53CBF /* Berlin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E051AA1090500F53CBF /* Berlin.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +57,18 @@
 		511B5DE31AA097D300F53CBF /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		511B5DE41AA09F3500F53CBF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		511B5DEE1AA0D90800F53CBF /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		511B5DEF1AA0D90800F53CBF /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		511B5DF21AA0DAF200F53CBF /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		511B5DF31AA0DAF200F53CBF /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		511B5DF61AA0E37500F53CBF /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		511B5DF71AA0E37500F53CBF /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
+		511B5DFA1AA0FAFD00F53CBF /* prev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prev.png; sourceTree = "<group>"; };
+		511B5DFB1AA0FAFD00F53CBF /* prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prev@2x.png"; sourceTree = "<group>"; };
+		511B5DFE1AA107B100F53CBF /* Stuttgart.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Stuttgart.gpx; sourceTree = "<group>"; };
+		511B5E011AA1085E00F53CBF /* Bern.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bern.gpx; sourceTree = "<group>"; };
+		511B5E031AA108CC00F53CBF /* Zürich.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Zürich.gpx"; sourceTree = "<group>"; };
+		511B5E051AA1090500F53CBF /* Berlin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Berlin.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +116,15 @@
 		511B5DBA1AA0952E00F53CBF /* Culture Radio iOS App */ = {
 			isa = PBXGroup;
 			children = (
+				511B5E001AA107B500F53CBF /* Locations */,
+				511B5DEE1AA0D90800F53CBF /* pause.png */,
+				511B5DEF1AA0D90800F53CBF /* play.png */,
+				511B5DF21AA0DAF200F53CBF /* pause@2x.png */,
+				511B5DF31AA0DAF200F53CBF /* play@2x.png */,
+				511B5DF61AA0E37500F53CBF /* next.png */,
+				511B5DF71AA0E37500F53CBF /* next@2x.png */,
+				511B5DFA1AA0FAFD00F53CBF /* prev.png */,
+				511B5DFB1AA0FAFD00F53CBF /* prev@2x.png */,
 				511B5DE31AA097D300F53CBF /* Config.h */,
 				511B5DBF1AA0952E00F53CBF /* AppDelegate.h */,
 				511B5DC01AA0952E00F53CBF /* AppDelegate.m */,
@@ -128,6 +161,17 @@
 				511B5DD61AA0952E00F53CBF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		511B5E001AA107B500F53CBF /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				511B5DFE1AA107B100F53CBF /* Stuttgart.gpx */,
+				511B5E011AA1085E00F53CBF /* Bern.gpx */,
+				511B5E031AA108CC00F53CBF /* Zürich.gpx */,
+				511B5E051AA1090500F53CBF /* Berlin.gpx */,
+			);
+			name = Locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,8 +259,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511B5E021AA1085E00F53CBF /* Bern.gpx in Resources */,
+				511B5DF81AA0E37500F53CBF /* next.png in Resources */,
+				511B5DFD1AA0FAFD00F53CBF /* prev@2x.png in Resources */,
 				511B5DCC1AA0952E00F53CBF /* LaunchScreen.xib in Resources */,
+				511B5DFC1AA0FAFD00F53CBF /* prev.png in Resources */,
+				511B5DF11AA0D90800F53CBF /* play.png in Resources */,
+				511B5DF51AA0DAF200F53CBF /* play@2x.png in Resources */,
+				511B5E061AA1090500F53CBF /* Berlin.gpx in Resources */,
+				511B5DFF1AA107B100F53CBF /* Stuttgart.gpx in Resources */,
+				511B5DF41AA0DAF200F53CBF /* pause@2x.png in Resources */,
 				511B5DC91AA0952E00F53CBF /* Images.xcassets in Resources */,
+				511B5DF01AA0D90800F53CBF /* pause.png in Resources */,
+				511B5E041AA108CC00F53CBF /* Zürich.gpx in Resources */,
+				511B5DF91AA0E37500F53CBF /* next@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
