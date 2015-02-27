@@ -1,2 +1,3 @@
 .DS_Store
 username.txt
+db.sqlite3
