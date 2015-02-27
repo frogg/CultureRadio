@@ -8,4 +8,4 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ('name',) #that location and id is not shown
+        fields = ('spotifyUri',) #that location,id, and name is not shown

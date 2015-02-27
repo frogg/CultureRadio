@@ -24,8 +24,10 @@ def getSpotifyUris(request,latitude=1,longitude=1, format=None):
      serializer = ArtistSerializer(artists, many = True)
 
      #return Response(serializer.data)
+     #check if there is an existing entry in database (not far away from current location)
+
      dic = getNearbyPlaces(latitude,longitude)
-     logger.error(type(dic))
+     #logger.error(type(dic))
      if dic["continueSearching"] != True :
           return Response(dic)
      return Response('Noting found yet')
