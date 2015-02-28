@@ -13,7 +13,6 @@
 		511B5DC91AA0952E00F53CBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DC81AA0952E00F53CBF /* Images.xcassets */; };
 		511B5DCC1AA0952E00F53CBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DCA1AA0952E00F53CBF /* LaunchScreen.xib */; };
 		511B5DD81AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5DD71AA0952E00F53CBF /* Culture_Radio_iOS_AppTests.m */; };
-		511B5DE21AA0978F00F53CBF /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE11AA0978F00F53CBF /* Spotify.framework */; };
 		511B5DE51AA09F3500F53CBF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE41AA09F3500F53CBF /* AVFoundation.framework */; };
 		511B5DE71AA09F3C00F53CBF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE61AA09F3C00F53CBF /* MediaPlayer.framework */; };
 		511B5DF01AA0D90800F53CBF /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5DEE1AA0D90800F53CBF /* pause.png */; };
@@ -28,6 +27,9 @@
 		511B5E021AA1085E00F53CBF /* Bern.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E011AA1085E00F53CBF /* Bern.gpx */; };
 		511B5E041AA108CC00F53CBF /* Zürich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E031AA108CC00F53CBF /* Zürich.gpx */; };
 		511B5E061AA1090500F53CBF /* Berlin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E051AA1090500F53CBF /* Berlin.gpx */; };
+		511B5E091AA1109500F53CBF /* CoverImageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 511B5E081AA1109500F53CBF /* CoverImageRenderer.m */; };
+		511B5E0B1AA1AE8E00F53CBF /* coverStecknadel.png in Resources */ = {isa = PBXBuildFile; fileRef = 511B5E0A1AA1AE8E00F53CBF /* coverStecknadel.png */; };
+		51CDA9131AA1BBB1002571F7 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511B5DE11AA0978F00F53CBF /* Spotify.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,9 @@
 		511B5E011AA1085E00F53CBF /* Bern.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bern.gpx; sourceTree = "<group>"; };
 		511B5E031AA108CC00F53CBF /* Zürich.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Zürich.gpx"; sourceTree = "<group>"; };
 		511B5E051AA1090500F53CBF /* Berlin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Berlin.gpx; sourceTree = "<group>"; };
+		511B5E071AA1109500F53CBF /* CoverImageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverImageRenderer.h; sourceTree = "<group>"; };
+		511B5E081AA1109500F53CBF /* CoverImageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverImageRenderer.m; sourceTree = "<group>"; };
+		511B5E0A1AA1AE8E00F53CBF /* coverStecknadel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coverStecknadel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +83,7 @@
 			files = (
 				511B5DE71AA09F3C00F53CBF /* MediaPlayer.framework in Frameworks */,
 				511B5DE51AA09F3500F53CBF /* AVFoundation.framework in Frameworks */,
-				511B5DE21AA0978F00F53CBF /* Spotify.framework in Frameworks */,
+				51CDA9131AA1BBB1002571F7 /* Spotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,11 +130,14 @@
 				511B5DF71AA0E37500F53CBF /* next@2x.png */,
 				511B5DFA1AA0FAFD00F53CBF /* prev.png */,
 				511B5DFB1AA0FAFD00F53CBF /* prev@2x.png */,
+				511B5E0A1AA1AE8E00F53CBF /* coverStecknadel.png */,
 				511B5DE31AA097D300F53CBF /* Config.h */,
 				511B5DBF1AA0952E00F53CBF /* AppDelegate.h */,
 				511B5DC01AA0952E00F53CBF /* AppDelegate.m */,
 				511B5DC21AA0952E00F53CBF /* MainViewController.h */,
 				511B5DC31AA0952E00F53CBF /* MainViewController.m */,
+				511B5E071AA1109500F53CBF /* CoverImageRenderer.h */,
+				511B5E081AA1109500F53CBF /* CoverImageRenderer.m */,
 				511B5DC81AA0952E00F53CBF /* Images.xcassets */,
 				511B5DCA1AA0952E00F53CBF /* LaunchScreen.xib */,
 				511B5DBB1AA0952E00F53CBF /* Supporting Files */,
@@ -261,6 +269,7 @@
 			files = (
 				511B5E021AA1085E00F53CBF /* Bern.gpx in Resources */,
 				511B5DF81AA0E37500F53CBF /* next.png in Resources */,
+				511B5E0B1AA1AE8E00F53CBF /* coverStecknadel.png in Resources */,
 				511B5DFD1AA0FAFD00F53CBF /* prev@2x.png in Resources */,
 				511B5DCC1AA0952E00F53CBF /* LaunchScreen.xib in Resources */,
 				511B5DFC1AA0FAFD00F53CBF /* prev.png in Resources */,
@@ -290,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511B5E091AA1109500F53CBF /* CoverImageRenderer.m in Sources */,
 				511B5DC41AA0952E00F53CBF /* MainViewController.m in Sources */,
 				511B5DC11AA0952E00F53CBF /* AppDelegate.m in Sources */,
 				511B5DBE1AA0952E00F53CBF /* main.m in Sources */,
@@ -412,6 +422,10 @@
 					Radio,
 					iOS,
 					App,
+					"$(PROJECT_DIR)/Culture",
+					Radio,
+					iOS,
+					App,
 				);
 				INFOPLIST_FILE = "Culture Radio iOS App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -428,6 +442,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Culture",
+					Radio,
+					iOS,
+					App,
 					"$(PROJECT_DIR)/Culture",
 					Radio,
 					iOS,
@@ -495,6 +513,7 @@
 				511B5DDD1AA0952E00F53CBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		511B5DDE1AA0952E00F53CBF /* Build configuration list for PBXNativeTarget "Culture Radio iOS AppTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +522,7 @@
 				511B5DE01AA0952E00F53CBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

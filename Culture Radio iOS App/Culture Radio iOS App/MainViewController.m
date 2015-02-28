@@ -21,14 +21,18 @@
 @property (nonatomic,strong) UIView *solidBackgroundForControls;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UIButton *darkShadeMapView;
+@property (nonatomic, strong) UILabel *cityLabel;
 
 
 
 
 @end
 
+int currentPlay = 0;
+BOOL musicIsPausedByUser = false;
+
 @implementation MainViewController
-@synthesize locationManager,playPauseButton,nextButton,trackInformationLabel,mapView,darkShadeMapView,solidBackgroundForControls,prevButton;
+@synthesize locationManager,playPauseButton,nextButton,trackInformationLabel,mapView,darkShadeMapView,solidBackgroundForControls,prevButton,cityLabel;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor blackColor];
@@ -36,14 +40,14 @@
     
     
     mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
-//    mapView.showsUserLocation = YES;
+    //    mapView.showsUserLocation = YES;
     mapView.mapType = MKMapTypeSatellite;
     mapView.userInteractionEnabled=NO;
     mapView.delegate=self;
     mapView.showsUserLocation=YES;
     //mapView.region = MKCoordinateRegionMake(mapView.centerCoordinate, MKCoordinateSpanMake(10, 10));
     [self.view addSubview:mapView];
-
+    
     darkShadeMapView = [UIButton buttonWithType:UIButtonTypeCustom];
     darkShadeMapView.frame=mapView.frame;
     darkShadeMapView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
@@ -68,6 +72,7 @@
     
     
     solidBackgroundForControls = [[UIView alloc] initWithFrame:CGRectMake(0, self.coverView.frame.origin.y+self.coverView.frame.size.height, self.view.frame.size.width, 70)];
+    
     [self.view addSubview:solidBackgroundForControls];
     
     playPauseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -76,7 +81,7 @@
     
     playPauseButton.tintColor=[UIColor lightGrayColor];
     [playPauseButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-
+    
     playPauseButton.frame=CGRectMake(self.view.frame.size.width/2 - 35, 0, 70, 70);
     [playPauseButton addTarget:self action:@selector(playPauseButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [solidBackgroundForControls addSubview:playPauseButton];
@@ -98,7 +103,7 @@
     [solidBackgroundForControls addSubview:prevButton];
     
     
-
+    
     [self.view bringSubviewToFront:self.coverView];
     
     
@@ -111,6 +116,13 @@
     [self.view addSubview:trackInformationLabel];
     
     
+    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, trackInformationLabel.frame.origin.y+trackInformationLabel.frame.size.height, self.view.frame.size.width, 70)];
+    cityLabel.font=[UIFont systemFontOfSize:30];
+    cityLabel.textAlignment=NSTextAlignmentCenter;
+    cityLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:cityLabel];
+    
+    
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self becomeFirstResponder];
     
@@ -119,20 +131,28 @@
 
 - (void)mapView:(MKMapView *)map didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    [map setCenterCoordinate:map.userLocation.location.coordinate animated:YES];
+    MKCoordinateSpan span = MKCoordinateSpanMake(1,1);
+    CLLocationCoordinate2D coordinate = map.userLocation.location.coordinate;
+    MKCoordinateRegion region = {coordinate, span};
+    
+    MKCoordinateRegion regionThatFits = [self.mapView regionThatFits:region];
+    NSLog(@"Fit Region %f %f", regionThatFits.center.latitude, regionThatFits.center.longitude);
+    
+    [self.mapView setRegion:regionThatFits animated:YES];
+    //    [map setCenterCoordinate:map.userLocation.location.coordinate animated:YES];
 }
 
 -(void) showMap {
     [UIView animateWithDuration:0.5
                           delay:0
-                        options:UIViewAnimationCurveLinear
+                        options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          darkShadeMapView.alpha=0;
                          //self.coverView.alpha=0;
                          self.trackInformationLabel.alpha=0;
                          self.coverView.frame=CGRectMake(0, self.view.frame.size.height-70, 70, 70);
-          //               self.playPauseButton.alpha=0;
-        //                 nextButton.alpha=0;
+                         //               self.playPauseButton.alpha=0;
+                         //                 nextButton.alpha=0;
                          solidBackgroundForControls.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
                          solidBackgroundForControls.frame=CGRectMake(0, self.view.frame.size.height-70, self.view.frame.size.width, 70);
                          
@@ -141,22 +161,25 @@
                      completion:^(BOOL finished) {
                          mapView.mapType = MKMapTypeHybrid;
                          mapView.userInteractionEnabled=YES;
-                         UIBarButtonItem *backToMusic = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backToMusic)];
-                         self.navigationItem.rightBarButtonItem=backToMusic;
+                         
+                         UIButton *backToMusic = [UIButton buttonWithType:UIButtonTypeCustom];
+                         backToMusic.frame = CGRectMake(0, 0, 70, 70);
+                         [backToMusic addTarget:self action:@selector(backToMusic) forControlEvents:UIControlEventTouchUpInside];
+                         [solidBackgroundForControls addSubview:backToMusic];
                      }];
 }
 
 -(void) backToMusic {
     [UIView animateWithDuration:0.5
                           delay:0
-                        options:UIViewAnimationCurveLinear
+                        options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          darkShadeMapView.alpha=1;
                          //self.coverView.alpha=1;
                          self.trackInformationLabel.alpha=1;
                          self.coverView.frame=CGRectMake(30, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width-60, self.view.frame.size.width);
-//                         self.playPauseButton.alpha=1;
-//                         nextButton.alpha=1;
+                         //                         self.playPauseButton.alpha=1;
+                         //                         nextButton.alpha=1;
                          solidBackgroundForControls.backgroundColor=[UIColor clearColor];
                          solidBackgroundForControls.frame=CGRectMake(0, self.coverView.frame.origin.y+self.coverView.frame.size.height, self.view.frame.size.width, 70);
                          
@@ -175,8 +198,8 @@
     //NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 }
 
--(void) play {
-    [SPTRequest requestItemAtURI:[NSURL URLWithString:@"spotify:album:7LGeYkQRzJJbk0QUkczuCD"]
+-(void) playTrackFromSpotifyURI:(NSString *) uri  {
+    [SPTRequest requestItemAtURI:[NSURL URLWithString:uri]
                      withSession:self.session
                         callback:^(NSError *error, id object) {
                             
@@ -185,7 +208,9 @@
                                 return;
                             }
                             
-                            [self.player playTrackProvider:(id <SPTTrackProvider>)object callback:nil];
+                            [self.player playTrackProvider:(id <SPTTrackProvider>)object callback:^(NSError *error) {
+                                NSLog(@"%@",error.description);
+                            }];
                         }];
 }
 
@@ -227,10 +252,6 @@
     [self updateCoverView];
     
     [playPauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
-    
-    
-
-    
 }
 
 -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangePlaybackStatus:(BOOL)isPlaying {
@@ -239,7 +260,7 @@
         [playPauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
     } else {
         NSLog(@"Not playing");
-            [playPauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+        [playPauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -259,21 +280,38 @@
 
 -(void) playNextTrack {
     //temporär
-    [self play];
+   /* if(currentPlay%2==0) {
+        [self playTrackFromSpotifyURI:@"spotify:track:3Lmx5EWbES1hOADj13PwO0"];
+    } else {
+        [self playTrackFromSpotifyURI:@"spotify:track:5KMAn9u1hCxQB6kdqoQONg"];
+    }*/
+    
+    currentPlay++;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                    ^{
                        
-                       NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.137.192:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
-                                          NSLog(@"Load New Data Ffrom Server");
+                       NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
+                       
+                       NSLog(@"Load New Data Ffrom Server");
+                       
+                       NSLog(@"%@",[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]);
+                       
                        NSData * data=[NSData dataWithContentsOfURL:url];
+                       
                        
                        
                        dispatch_async(dispatch_get_main_queue(),
                                       ^{
                                           if(data) {
                                               NSDictionary *json =[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                              //NSLog(@"%@",json[@"result"][0][@"uri"]);
                                               NSLog(@"%@",json);
+                                              [self playTrackFromSpotifyURI:json[@"result"][currentPlay%(int)[json[@"result"] count]][@"uri"]];
+                                              
+                                              cityLabel.text = json[@"result"][currentPlay%(int)[json[@"result"] count]][@"city"];
+                                              
+                                              currentPlay++;
                                           } else {
                                               NSLog(@"loading data failed 😭");
                                           }
@@ -311,14 +349,22 @@
                               
                               NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
                               
+                              void (^finishedRendering)(UIImage *render) = ^void(UIImage *render) {
+                                  MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: render];
+                                  
+                                  [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataTrackName] forKey:MPMediaItemPropertyTitle];
+                                  [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataArtistName] forKey:MPMediaItemPropertyArtist];
+                                  [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataAlbumName] forKey:MPMediaItemPropertyAlbumTitle];
+                                  
+                                  
+                                  
+                                  [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
+                                  [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+                              };
                               
-                              MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: image];
+                              [CoverImageRenderer renderCoverImageForLocation:self.mapView.region withLocationName:@"Bern" forBandName:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataArtistName] usingCoverImage:image andCallbackBlock:finishedRendering];
                               
-                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataTrackName] forKey:MPMediaItemPropertyTitle];
-                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataArtistName] forKey:MPMediaItemPropertyArtist];
-                              [songInfo setObject:[self.player.currentTrackMetadata valueForKey:SPTAudioStreamingMetadataAlbumName] forKey:MPMediaItemPropertyAlbumTitle];
-                              [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];
-                              [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+                              
                               
                               self.coverView.image = image;
                               if (image == nil) {
