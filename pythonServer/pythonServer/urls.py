@@ -10,3 +10,10 @@ urlpatterns = patterns('',
     url(r'^location/',include('location.urls',namespace='location')),
 )
 
+'''
+urlpatterns += patterns(
+    'django.contrib.staticfiles.views',
+    url(r'^(?:index.html)?$', 'serve', kwargs={'path': 'index.html'}),
+    url(r'^(?P<path>(?:js|css|img)/.*)$', 'webapp'),
+)
+'''
