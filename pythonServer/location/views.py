@@ -14,6 +14,7 @@ from xml.dom.minidom import parseString
 from location.models import Location
 from rest_framework.renderers import JSONRenderer
 from location.serializers import LocationSerializer
+from spotifyData.models import SpotifyData
 
 
 logger = logging.getLogger(__name__)
@@ -65,8 +66,24 @@ def getArtistForCity(location):
           dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
           #logger.error(node.firstChild.firstChild.nodeValue)
           if not dic["continueSearching"] :
-               listResults.append({'uri':dic["result"],'location':serializer.data,'artist':node.firstChild.firstChild.nodeValue})
+               artistName = node.firstChild.firstChild.nodeValue
+               listResults.append({'uri':dic["result"],'location':serializer.data,'artist':artistName})
                #stop searching and return result
+               try:
+                    location.save()
+               #location is already stored in database
+               except:
+                    logger.error('already stored')
+                    spotify = SpotifyData(uri = dic["result"])
+                    artist = Artist(name=artistName)
+                    #get_or_create: useful
+                    spotify.save()
+                    artist.spotifyUri=spotify
+                    artist.save()
+                    #query for location
+                    #artist.location.add(location)
+
+
                if(len(listResults)>5):
                     return {'continueSearching':False, 'result':listResults}
 
