@@ -8,7 +8,9 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^location/',include('location.urls',namespace='location')),
+    url(r'^webservice/',include('webservice.urls',namespace='webservice')),
 )
+
 
 '''
 urlpatterns += patterns(

@@ -1,3 +1,4 @@
+{% load staticfiles%}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,7 +6,7 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-		<link rel="stylesheet" type="text/css" href="webapp/style.css">
+		<link rel="stylesheet" type="text/css" href="{% static 'webservice/style.css' %}" />
 	</head>
 
 	<body data-location-state="following">
@@ -63,7 +64,7 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="{% static 'webservice/app.js'%}"></script>
 
-		<script type="text/javascript" src="webapp/app.js"></script>
 	</body>
 </html>
