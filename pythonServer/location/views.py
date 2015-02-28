@@ -12,6 +12,8 @@ import json
 import requests
 from xml.dom.minidom import parseString
 from location.models import Location
+from rest_framework.renderers import JSONRenderer
+from location.serializers import LocationSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -56,14 +58,14 @@ def getArtistForCity(location):
      dom = parseString(r.text)
      listResults = []
      #logger.error(dom2.toxml())
-
+     serializer = LocationSerializer(location)
      #go through the artists
      for node in dom.getElementsByTagName('artist'):  # visit every node with this tag
           #node.firstChild.firstChild.nodeValue is the artists name
           dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
           #logger.error(node.firstChild.firstChild.nodeValue)
           if not dic["continueSearching"] :
-               listResults.append({'uri':dic["result"],'city':city,'artist':node.firstChild.firstChild.nodeValue})
+               listResults.append({'uri':dic["result"],'location':serializer.data,'artist':node.firstChild.firstChild.nodeValue})
                #stop searching and return result
                if(len(listResults)>5):
                     return {'continueSearching':False, 'result':listResults}
