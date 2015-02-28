@@ -49,7 +49,7 @@ def getArtistForCity(location):
      dbdic = loadArtistsFromDataBase(location)
      #no db entries, load from web
      if dbdic['dbEntries']:
-          logger.error('loadedFromDB')
+          #logger.error('loadedFromDB')
           return {'continueSearching':dbdic['continueSearching'], 'result':dbdic['result']}
           #here could some background data collection be done with Celery
      else:
@@ -73,7 +73,7 @@ def getArtistForCity(location):
                          location.save()
                     #location is already stored in database (exception because of unique identifier)
                     except:
-                         logger.error('location already stored')
+                         #logger.error('location already stored')
                          location = Location.objects.get(name=location.name, countryCode=location.countryCode)
                     spotify = SpotifyData(uri=dic["result"])
                     artist = Artist(name=artistName)
@@ -104,10 +104,10 @@ def loadArtistsFromDataBase(location):
           artist = Artist.objects.filter(location=locationEntrie)
           #logger.error(artist)
           for a in artist:
-               logger.error(a.name)
+               #logger.error(a.name)
                spotifyData = SpotifyData.objects.filter(artist=a)
                for s in spotifyData:
-                    logger.error(s.uri)
+                    #logger.error(s.uri)
                     dblist.append({'uri': s.uri, 'location': serializer.data, 'artist': a.name})
           #exit search if list size is bigger than 5
           return {'dbEntries': True, 'continueSearching': (not len(dblist) > 5), 'result': dblist}
