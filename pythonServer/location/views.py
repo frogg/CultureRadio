@@ -11,6 +11,9 @@ import logging
 import json
 import requests
 from xml.dom.minidom import parseString
+from location.models import Location
+from rest_framework.renderers import JSONRenderer
+from location.serializers import LocationSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -46,22 +49,23 @@ def getSpotifyId(artist):
 
 
 #get artists for city
-def getArtistForCity(city):
+def getArtistForCity(location):
      #city="San Francisco" #dummyData
+     city = location.name
      #improvement idea => ask for multiple cities at one time with or
      url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
      r = requests.get(url)
      dom = parseString(r.text)
      listResults = []
      #logger.error(dom2.toxml())
-
+     serializer = LocationSerializer(location)
      #go through the artists
      for node in dom.getElementsByTagName('artist'):  # visit every node with this tag
           #node.firstChild.firstChild.nodeValue is the artists name
           dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
           #logger.error(node.firstChild.firstChild.nodeValue)
           if not dic["continueSearching"] :
-               listResults.append({'uri':dic["result"],'city':city,'artist':node.firstChild.firstChild.nodeValue})
+               listResults.append({'uri':dic["result"],'location':serializer.data,'artist':node.firstChild.firstChild.nodeValue})
                #stop searching and return result
                if(len(listResults)>5):
                     return {'continueSearching':False, 'result':listResults}
@@ -77,16 +81,17 @@ def getNearbyPlaces(latitude,longitude):
      data = json.loads(response.read().decode("utf-8"))
      listResults = []
      for num in range(0,len(data["geonames"])):
+          da = data["geonames"][num]
           #data["geonames"][num]["toponymName"] contains the city names
-          dic = getArtistForCity(data["geonames"][num]["toponymName"])
-          #improve if condition
+          location = Location(name=da["toponymName"], countryName=da["countryName"], countryCode=da["countryCode"],latitude=da["lat"],longitude=da["lng"])
+          #location.save() don't save location here, just save locations with spotify tracks connected
+          dic = getArtistForCity(location)
           if not dic["continueSearching"] or (len(listResults)+len(dic["result"]))>5:
                listResults.extend(dic["result"])
-               #stop searching and return result immeadiately (interrupt for-loop)
+               #stop searching and return result immediatly (interrupt for-loop)
                return {'result':listResults}
 
      return {'result':listResults}
-
 
 
 def loadGeoUsername():
