@@ -309,7 +309,7 @@ BOOL musicIsPausedByUser = false;
                                               NSLog(@"%@",json);
                                               [self playTrackFromSpotifyURI:json[@"result"][currentPlay%(int)[json[@"result"] count]][@"uri"]];
                                               
-                                              cityLabel.text = json[@"result"][currentPlay%(int)[json[@"result"] count]][@"city"];
+                                              cityLabel.text = [NSString stringWithFormat:@"%@, %@",json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"name"],json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"countryName"]];
                                               
                                               currentPlay++;
                                           } else {
