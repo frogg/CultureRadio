@@ -30,7 +30,7 @@ def getSpotifyUris(request,latitude=1,longitude=1, format=None):
      #logger.error(type(dic))
      if len(dic["result"])>0:
           return Response(dic)
-     return Response('Nothing found yet')
+     return Response('Nothing found')
 
 #get Spotify Ids
 def getSpotifyId(artist):
@@ -77,20 +77,14 @@ def getNearbyPlaces(latitude,longitude):
      data = json.loads(response.read().decode("utf-8"))
      listResults = []
      for num in range(0,len(data["geonames"])):
+          #data["geonames"][num]["toponymName"] contains the city names
           dic = getArtistForCity(data["geonames"][num]["toponymName"])
           #improve if condition
-          if not dic["continueSearching"]:
+          if not dic["continueSearching"] or (len(listResults)+len(dic["result"]))>5:
                listResults.extend(dic["result"])
-               listResults.extend([])
-               #stop searching and return result
-               return {'continueSearching':False, 'result':listResults}
-          else:
-               #logger.error(data["geonames"][num]["toponymName"])
-               listResults.extend(dic["result"])
-               if len(listResults)>5:
-                    return {'continueSearching':False, 'result':listResults}
+               #stop searching and return result immeadiately (interrupt for-loop)
+               return {'result':listResults}
 
-     #logger.error(data["geonames"][0]["toponymName"])
      return {'result':listResults}
 
 
