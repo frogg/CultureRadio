@@ -25,12 +25,12 @@ def getSpotifyUris(request,latitude=1,longitude=1, format=None):
 
      #return Response(serializer.data)
      #check if there is an existing entry in database (not far away from current location)
-
+     list = []
      dic = getNearbyPlaces(latitude,longitude)
      #logger.error(type(dic))
-     if dic["continueSearching"] != True :
+     if len(dic["result"])>0:
           return Response(dic)
-     return Response('Noting found yet')
+     return Response('Nothing found yet')
 
 #get Spotify Ids
 def getSpotifyId(artist):
@@ -52,17 +52,22 @@ def getArtistForCity(city):
      url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
      r = requests.get(url)
      dom = parseString(r.text)
+     listResults = []
      #logger.error(dom2.toxml())
+
      #go through the artists
      for node in dom.getElementsByTagName('artist'):  # visit every node with this tag
           #node.firstChild.firstChild.nodeValue is the artists name
           dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
           #logger.error(node.firstChild.firstChild.nodeValue)
-          if dic["continueSearching"] !=True :
+          if not dic["continueSearching"] :
+               listResults.append({'uri':dic["result"],'city':city,'artist':node.firstChild.firstChild.nodeValue})
                #stop searching and return result
-               return {'continueSearching':False, 'result':dic["result"],'city':city}
-     #found nothing till now => continue searching
-     return {'continueSearching':True, 'result':""}
+               if(len(listResults)>5):
+                    return {'continueSearching':False, 'result':listResults}
+
+     #found nothing less than x results => continue searching
+     return {'continueSearching':True, 'result':listResults}
 
 
 #get nearbyPlaces using the geonames api
@@ -70,17 +75,23 @@ def getNearbyPlaces(latitude,longitude):
      request = 'http://api.geonames.org/findNearbyPlaceNameJSON?lat='+latitude +'&lng='+longitude+'&radius=300&maxRow=15&cities=cities15000&username=' + loadGeoUsername()
      response = urllib.request.urlopen(request)
      data = json.loads(response.read().decode("utf-8"))
-
+     listResults = []
      for num in range(0,len(data["geonames"])):
           dic = getArtistForCity(data["geonames"][num]["toponymName"])
-          if dic["continueSearching"] !=True :
+          #improve if condition
+          if not dic["continueSearching"]:
+               listResults.extend(dic["result"])
+               listResults.extend([])
                #stop searching and return result
-               return {'continueSearching':False, 'result':dic["result"],'city':dic["city"]}
+               return {'continueSearching':False, 'result':listResults}
           else:
-               logger.error(data["geonames"][num]["toponymName"])
+               #logger.error(data["geonames"][num]["toponymName"])
+               listResults.extend(dic["result"])
+               if len(listResults)>5:
+                    return {'continueSearching':False, 'result':listResults}
 
      #logger.error(data["geonames"][0]["toponymName"])
-     return {'continueSearching':True, 'result':""}
+     return {'result':listResults}
 
 
 
@@ -89,3 +100,5 @@ def loadGeoUsername():
           username=myfile.read()
      #logger.error(username)
      return username
+
+
