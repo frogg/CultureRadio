@@ -51,6 +51,7 @@ def getArtistForCity(location):
      if dbdic['dbEntries']:
           logger.error('loadedFromDB')
           return {'continueSearching':dbdic['continueSearching'], 'result':dbdic['result']}
+          #here could some background data collection be done with Celery
      else:
           #logger.error('load artists from api')
           #city="San Francisco" #dummyData
