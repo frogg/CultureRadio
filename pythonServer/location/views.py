@@ -11,6 +11,7 @@ import logging
 import json
 import requests
 from xml.dom.minidom import parseString
+from location.models import Location
 
 
 logger = logging.getLogger(__name__)
@@ -46,8 +47,9 @@ def getSpotifyId(artist):
 
 
 #get artists for city
-def getArtistForCity(city):
+def getArtistForCity(location):
      #city="San Francisco" #dummyData
+     city = location.name
      #improvement idea => ask for multiple cities at one time with or
      url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
      r = requests.get(url)
@@ -77,16 +79,17 @@ def getNearbyPlaces(latitude,longitude):
      data = json.loads(response.read().decode("utf-8"))
      listResults = []
      for num in range(0,len(data["geonames"])):
+          da = data["geonames"][num]
           #data["geonames"][num]["toponymName"] contains the city names
-          dic = getArtistForCity(data["geonames"][num]["toponymName"])
-          #improve if condition
+          location = Location(name=da["toponymName"], countryName=da["countryName"], countryCode=da["countryCode"],latitude=da["lat"],longitude=da["lng"])
+          #location.save() don't save location here, just save locations with spotify tracks connected
+          dic = getArtistForCity(location)
           if not dic["continueSearching"] or (len(listResults)+len(dic["result"]))>5:
                listResults.extend(dic["result"])
-               #stop searching and return result immeadiately (interrupt for-loop)
+               #stop searching and return result immediatly (interrupt for-loop)
                return {'result':listResults}
 
      return {'result':listResults}
-
 
 
 def loadGeoUsername():
