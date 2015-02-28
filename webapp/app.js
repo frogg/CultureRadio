@@ -65,13 +65,15 @@ function renderTrack(track) {
 	
 	//artist-info background
 	//artist-name name
-	$(".artist-info").css({backgroundImage: "url(" +  _.first(track.artist.images).url + ")"});
+	var img = _.first(track.artist.images);
+	$(".artist-info").css({backgroundImage: "url(" +  (img? img.url : '') + ")"});
 	$(".artist-name").text(track.artist.name);
 
 	//track-info background
 	//album-info album text
 	//track-name name
-	$(".track-info").css({backgroundImage: "url(" + _.first(track.album.images).url + ")"});
+	var img = _.first(track.album.images);
+	$(".track-info").css({backgroundImage: "url(" + (img? img.url : '') + ")"});
 	$(".album-info").text(track.album.name);	
 	$(".track-name").text(track.name);
 
@@ -126,15 +128,15 @@ function setPosition(position, center) {
 	}
 
 	pendingRequestTimer = setTimeout(function() {
-		$.get("http://192.168.137.192:8000/location/lat/66.7200/long/66.7200/", null, "application/json")
+		$.get("http://192.168.137.117:8000/location/lat/" + position.lat() + "/long/" + position.lng() + "/", null, "application/json")
 		.done(function(d) {
-			var artistList = _.map(d, function(v) { return v.name}).join(",");
+			var artistList = _.map(d.result, function(v) { return v.artist}).join(",");
 			$('[name=artist-list]').val(artistList);
 
 			if (isPlayerIdle())
 				getMoreTracks();
 		});
-	}, 100);
+	}, 400);
 
 	if (isPlayerIdle()) {
 		getMoreTracks();
