@@ -50,7 +50,6 @@
         loginURL = [auth loginURLForClientId:@kClientId
                          declaredRedirectURL:[NSURL URLWithString:@kCallbackURL]
                                       scopes:@[SPTAuthStreamingScope]];
-        
     }
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));

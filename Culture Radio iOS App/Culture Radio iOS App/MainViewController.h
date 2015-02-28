@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Config.h"
 #import <Spotify/Spotify.h>
+#import "CoverImageRenderer.h"
 @import AVFoundation;
 @import MediaPlayer;
 @import CoreLocation;

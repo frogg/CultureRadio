@@ -9,7 +9,7 @@
 #ifndef Simple_Track_Playback_Config_h
 #define Simple_Track_Playback_Config_h
 
-#warning Please update these values to match the settings for your own application as these example values could change at any time.
+//Please update these values to match the settings for your own application as these example values could change at any time.
 // For an in-depth auth demo, see the "Basic Auth" demo project supplied with the SDK.
 // Don't forget to add your callback URL's prefix to the URL Types section in the target's Info pane!
 
