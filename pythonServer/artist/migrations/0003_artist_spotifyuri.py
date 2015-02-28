@@ -8,17 +8,14 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('spotifyData', '0001_initial'),
-        ('artist', '0001_initial'),
+        ('artist', '0002_artist_spotifyuri'),
     ]
 
-    '''
-    #deleted,if not db problems when migration
     operations = [
         migrations.AddField(
             model_name='artist',
             name='spotifyUri',
-            field=models.OneToOneField(default='dfadsfasdfasf', to='spotifyData.SpotifyData'),
+            field=models.ForeignKey(default=1, to='spotifyData.SpotifyData'),
             preserve_default=False,
         ),
     ]
-    '''

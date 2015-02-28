@@ -6,5 +6,5 @@ from spotifyData.models import SpotifyData
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
-    spotifyUri = models.OneToOneField(SpotifyData)
+    spotifyUri = models.ForeignKey(SpotifyData)
     location = models.ManyToManyField(Location, related_name='location')
