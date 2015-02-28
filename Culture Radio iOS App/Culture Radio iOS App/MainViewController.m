@@ -24,8 +24,6 @@
 @property (nonatomic, strong) UILabel *cityLabel;
 
 
-
-
 @end
 
 int currentPlay = 0;
@@ -289,9 +287,11 @@ BOOL musicIsPausedByUser = false;
         [self playTrackFromSpotifyURI:@"spotify:track:3Lmx5EWbES1hOADj13PwO0"];
     } else {
         [self playTrackFromSpotifyURI:@"spotify:track:5KMAn9u1hCxQB6kdqoQONg"];
-    }*/
-    
+    }
     currentPlay++;
+    */
+    
+    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                    ^{
@@ -313,7 +313,7 @@ BOOL musicIsPausedByUser = false;
                                               //NSLog(@"%@",json[@"result"][0][@"uri"]);
                                               NSLog(@"%@",json);
                                               [self playTrackFromSpotifyURI:json[@"result"][currentPlay%(int)[json[@"result"] count]][@"uri"]];
-                                              
+                                              NSLog(@"%u",currentPlay%(int)[json[@"result"] count]);
                                               cityLabel.text = [NSString stringWithFormat:@"%@, %@",json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"name"],json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"countryName"]];
                                               
                                               currentPlay++;
