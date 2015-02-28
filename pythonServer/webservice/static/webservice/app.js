@@ -33,7 +33,7 @@ function playTrack(track, spotify) {
 
 
 	//Set audio!
-	$('audio')[0].stop();
+//	$('audio')[0].stop();
 	$('audio').prop("src", spotify.preview_url);
 	$('audio')[0].play();
 }
