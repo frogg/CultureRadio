@@ -66,8 +66,9 @@ def getArtistForCity(location):
                for s in spotifyData:
                     logger.error(s.uri)
                     dblist.append({'uri':s.uri,'location':serializer.data,'artist':a.name})
-          return {'continueSearching':False, 'result':dblist}
-
+          #exit search if list size is bigger than 5
+          return {'continueSearching':(not len(dblist)>5), 'result':dblist}
+#TODO continue searching if nothing is found
      except:
           logger.error('load artists from api')
           #city="San Francisco" #dummyData
@@ -86,18 +87,19 @@ def getArtistForCity(location):
                     listResults.append({'uri':dic["result"],'location':serializer.data,'artist':artistName})
                     try:
                          location.save()
-                    #location is already stored in database
+                    #location is already stored in database (excpetion cause unique identifier)
                     except:
                          logger.error('location already stored')
-                         spotify = SpotifyData(uri = dic["result"])
-                         artist = Artist(name=artistName)
-                         #get_or_create: useful
-                         spotify.save()
-                         artist.spotifyUri=spotify
-                         artist.save()
-                         locationEntrie = Location.objects.get(name=location.name,countryCode=location.countryCode)
-                         artist.location.add(locationEntrie)
-                         artist.update()
+                         location = Location.objects.get(name=location.name,countryCode=location.countryCode)
+                    spotify = SpotifyData(uri = dic["result"])
+                    artist = Artist(name=artistName)
+                    #get_or_create: useful
+                    spotify.save()
+                    artist.spotifyUri=spotify
+                    artist.save()
+                    artist.location.add(location)
+                    #for update
+                    artist.save()
 
                     #stop searching and return result
                     if(len(listResults)>5):
