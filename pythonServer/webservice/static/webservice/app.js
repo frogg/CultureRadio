@@ -40,7 +40,7 @@ function playTrack(track, spotify) {
 function nextTrack() {
 	trackCounter++;
 	
-	$.get("http://192.168.137.117:8000/location/lat/" + positionLatLng.lat() + "/long/" + positionLatLng.lng() + "/", null, "application/json")
+	$.get("/location/lat/" + positionLatLng.lat() + "/long/" + positionLatLng.lng() + "/", null, "application/json")
 	.done(function(d) {
 		var track = d.result[trackCounter%d.result.length];
 
