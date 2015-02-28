@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'location',
     'artist',
     'rest_framework',
+    'spotifyData',
 )
 
 MIDDLEWARE_CLASSES = (
