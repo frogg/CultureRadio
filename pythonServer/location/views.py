@@ -14,6 +14,7 @@ from xml.dom.minidom import parseString
 from location.models import Location
 from rest_framework.renderers import JSONRenderer
 from location.serializers import LocationSerializer
+from spotifyData.models import SpotifyData
 
 
 logger = logging.getLogger(__name__)
@@ -50,28 +51,62 @@ def getSpotifyId(artist):
 
 #get artists for city
 def getArtistForCity(location):
-     #city="San Francisco" #dummyData
-     city = location.name
-     #improvement idea => ask for multiple cities at one time with or
-     url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
-     r = requests.get(url)
-     dom = parseString(r.text)
-     listResults = []
-     #logger.error(dom2.toxml())
      serializer = LocationSerializer(location)
-     #go through the artists
-     for node in dom.getElementsByTagName('artist'):  # visit every node with this tag
-          #node.firstChild.firstChild.nodeValue is the artists name
-          dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
-          #logger.error(node.firstChild.firstChild.nodeValue)
-          if not dic["continueSearching"] :
-               listResults.append({'uri':dic["result"],'location':serializer.data,'artist':node.firstChild.firstChild.nodeValue})
-               #stop searching and return result
-               if(len(listResults)>5):
-                    return {'continueSearching':False, 'result':listResults}
+     #check if there are any entries for a location in database
+     try:
+          #raises exception if it returns multiple values or none Element
+          locationEntrie = Location.objects.get(name=location.name,countryCode=location.countryCode)
+          #get artists connected with this article
+          artist = Artist.objects.filter(location=locationEntrie)
+          #logger.error(artist)
+          dblist = []
+          for a in artist:
+               logger.error(a.name)
+               spotifyData = SpotifyData.objects.filter(artist=a)
+               for s in spotifyData:
+                    logger.error(s.uri)
+                    dblist.append({'uri':s.uri,'location':serializer.data,'artist':a.name})
+          #exit search if list size is bigger than 5
+          return {'continueSearching':(not len(dblist)>5), 'result':dblist}
+#TODO continue searching if nothing is found
+     except:
+          logger.error('load artists from api')
+          #city="San Francisco" #dummyData
+          city = location.name
+          #improvement idea => ask for multiple cities at one time with or
+          url= 'http://musicbrainz.org/ws/2/artist/?query=beginarea:'+city+'%20OR%20area:'+city+'%20OR%20endarea:'+city+'&limit=100'
+          r = requests.get(url)
+          dom = parseString(r.text)
+          listResults = []
+          #logger.error(dom2.toxml())
+          #go through the artists
+          for node in dom.getElementsByTagName('artist'):  # visit every node with the tag "artist"
+               dic = getSpotifyId(node.firstChild.firstChild.nodeValue)
+               if not dic["continueSearching"] :
+                    artistName = node.firstChild.firstChild.nodeValue
+                    listResults.append({'uri':dic["result"],'location':serializer.data,'artist':artistName})
+                    try:
+                         location.save()
+                    #location is already stored in database (excpetion cause unique identifier)
+                    except:
+                         logger.error('location already stored')
+                         location = Location.objects.get(name=location.name,countryCode=location.countryCode)
+                    spotify = SpotifyData(uri = dic["result"])
+                    artist = Artist(name=artistName)
+                    #get_or_create: useful
+                    spotify.save()
+                    artist.spotifyUri=spotify
+                    artist.save()
+                    artist.location.add(location)
+                    #for update
+                    artist.save()
 
-     #found nothing less than x results => continue searching
-     return {'continueSearching':True, 'result':listResults}
+                    #stop searching and return result
+                    if(len(listResults)>5):
+                         return {'continueSearching':False, 'result':listResults}
+
+          #found nothing less than x results => continue searching
+          return {'continueSearching':True, 'result':listResults}
 
 
 #get nearbyPlaces using the geonames api
