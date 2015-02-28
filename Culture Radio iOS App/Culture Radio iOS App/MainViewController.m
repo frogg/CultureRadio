@@ -24,8 +24,6 @@
 @property (nonatomic, strong) UILabel *cityLabel;
 
 
-
-
 @end
 
 int currentPlay = 0;
@@ -116,15 +114,18 @@ BOOL musicIsPausedByUser = false;
     [self.view addSubview:trackInformationLabel];
     
     
-    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, trackInformationLabel.frame.origin.y+trackInformationLabel.frame.size.height, self.view.frame.size.width, 70)];
+    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, trackInformationLabel.frame.origin.y+trackInformationLabel.frame.size.height, self.view.frame.size.width, 100)];
     cityLabel.font=[UIFont systemFontOfSize:30];
     cityLabel.textAlignment=NSTextAlignmentCenter;
     cityLabel.textColor = [UIColor whiteColor];
+    cityLabel.numberOfLines=2;
     [self.view addSubview:cityLabel];
     
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self becomeFirstResponder];
+    
+    
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -148,6 +149,7 @@ BOOL musicIsPausedByUser = false;
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          darkShadeMapView.alpha=0;
+                         cityLabel.alpha=0;
                          //self.coverView.alpha=0;
                          self.trackInformationLabel.alpha=0;
                          self.coverView.frame=CGRectMake(0, self.view.frame.size.height-70, 70, 70);
@@ -175,6 +177,7 @@ BOOL musicIsPausedByUser = false;
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          darkShadeMapView.alpha=1;
+                         cityLabel.alpha=1;
                          //self.coverView.alpha=1;
                          self.trackInformationLabel.alpha=1;
                          self.coverView.frame=CGRectMake(30, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width-60, self.view.frame.size.width);
@@ -284,16 +287,18 @@ BOOL musicIsPausedByUser = false;
         [self playTrackFromSpotifyURI:@"spotify:track:3Lmx5EWbES1hOADj13PwO0"];
     } else {
         [self playTrackFromSpotifyURI:@"spotify:track:5KMAn9u1hCxQB6kdqoQONg"];
-    }*/
-    
+    }
     currentPlay++;
+    */
+    
+    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                    ^{
                        
                        NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
                        
-                       NSLog(@"Load New Data Ffrom Server");
+                       NSLog(@"Load New Data from Server");
                        
                        NSLog(@"%@",[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]);
                        
@@ -308,7 +313,7 @@ BOOL musicIsPausedByUser = false;
                                               //NSLog(@"%@",json[@"result"][0][@"uri"]);
                                               NSLog(@"%@",json);
                                               [self playTrackFromSpotifyURI:json[@"result"][currentPlay%(int)[json[@"result"] count]][@"uri"]];
-                                              
+                                              NSLog(@"%u",currentPlay%(int)[json[@"result"] count]);
                                               cityLabel.text = [NSString stringWithFormat:@"%@, %@",json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"name"],json[@"result"][currentPlay%(int)[json[@"result"] count]][@"location"][@"countryName"]];
                                               
                                               currentPlay++;

@@ -1,3 +1,4 @@
+{% load staticfiles%}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,9 +6,8 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
+		<link rel="stylesheet" type="text/css" href="{% static 'webservice/style.css' %}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">	</head>
 
 	<body data-location-state="following">
 		<div id="map-canvas"></div>
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="{% static 'webservice/app.js'%}"></script>
 
-		<script type="text/javascript" src="app.js"></script>
 	</body>
 </html>

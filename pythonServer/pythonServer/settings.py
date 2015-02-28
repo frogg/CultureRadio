@@ -38,8 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'location',
     'artist',
-    'rest_framework',
     'spotifyData',
+    'rest_framework',
+    'webservice',
 )
 
 MIDDLEWARE_CLASSES = (
