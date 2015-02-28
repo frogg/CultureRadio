@@ -8,4 +8,4 @@ Our backend server looks for artists and musicians nearby the user's location an
 Wiki
 ====
 
-All important facts about this project are dcumented in [our wiki](http://make.opendata.ch/wiki/project:cultural_radio)
+All important facts about this project are dcumented in [our wiki](http://make.opendata.ch/wiki/project:cultural_radio).
