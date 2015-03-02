@@ -155,7 +155,7 @@ def getNearbyPlaces(latitude, longitude):
 def loadGeoUsername():
      username = os.environ.get('GEONAMES_USERNAME', False)
      
-     if username == False
+     if username == False:
        with open("username.txt", "r") as myfile:
             username = myfile.read()
             
