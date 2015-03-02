@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 
 from rest_framework import status
@@ -152,8 +153,10 @@ def getNearbyPlaces(latitude, longitude):
 
 #get Username for Geo Api that is is not visible on gitHub
 def loadGeoUsername():
-     with open("username.txt", "r") as myfile:
-          username = myfile.read()
+     username = os.environ.get('GEONAMES_USERNAME', False)
+     
+     if username == False:
+       with open("username.txt", "r") as myfile:
+            username = myfile.read()
+            
      return username
-
-
