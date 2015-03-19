@@ -7,17 +7,46 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 		<link rel="stylesheet" type="text/css" href="{% static 'webservice/style.css' %}" />
-	</head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">	</head>
 
 	<body data-location-state="following">
+		<div id="map-canvas"></div>
+		<div class="titlebar">
+			Cultural Radio
+		</div>
+
+		<div class="song-mask">
+			
+		</div>
+
+		<div class="song-image">
+			<div class="song-real-image">
+			</div>
+
+			<div class="audio-container">
+				<audio id="music" class="voice-mon" src="" controls autoplay="autoplay">
+					HTML 5 AUDIO IS REQUIRED
+				</audio>
+				<button> SKIP </button>
+			</div>
+
+			<div class="song-text">
+				<div class="track-name"></div>
+				<div>
+					by <span class="artist-name"></span>
+				</div>
+			</div>
+
+			<div class="song-city">
+				Loading ...
+			</div>
+		</div>
+
 		<div class="floats">
 			
 			<div class="controls">		
 				<div class="audio-player">
 					<div class="currently-playing">Currenly playing <a href="http://longplayer.org/">longplayer</a> (dattazzz gimeeh json)</div>
-					<audio id="music" class="voice-mon" src="http://stream.spc.org:8008/longplayer" controls autoplay="autoplay">
-						HTML 5 AUDIO IS REQUIRED
-					</audio>
 				</div>
 
 				<div class="artist-lookup">
@@ -39,7 +68,7 @@
 				<div id="demo">Gelocation test!</div>
 			</div>
 		
-			<div id="map-canvas"></div>
+			<!--<div id="map-canvas"></div> -->
 
 			<div class="playlist">
 				Related Tracks

@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 
 from rest_framework import status
@@ -28,6 +29,20 @@ def getSpotifyUris(request, latitude=1, longitude=1, format=None):
      #logger.error(type(dic))
      if len(dic["result"]) > 0:
           return Response(dic)
+     else:
+          logger.error('enlarge search radius')
+          #move position for 300km
+          for x in range(0,4,1):
+               if x==0:
+                    dic = getNearbyPlaces(str(float(latitude)+2.0), longitude)
+               if x==1:
+                    dic = getNearbyPlaces(str(float(latitude)-2.0), longitude)
+               if x==2:
+                     dic = getNearbyPlaces(latitude, str(float(longitude)-2.0))
+               if x==3:
+                    dic = getNearbyPlaces(latitude, str(float(longitude)+2.0))
+               if len(dic["result"]) > 0:
+                    return Response(dic)
      return Response('Nothing found')  #enlarge the search
 
 
@@ -138,8 +153,10 @@ def getNearbyPlaces(latitude, longitude):
 
 #get Username for Geo Api that is is not visible on gitHub
 def loadGeoUsername():
-     with open("username.txt", "r") as myfile:
-          username = myfile.read()
+     username = os.environ.get('GEONAMES_USERNAME', False)
+     
+     if username == False:
+       with open("username.txt", "r") as myfile:
+            username = myfile.read()
+            
      return username
-
-
