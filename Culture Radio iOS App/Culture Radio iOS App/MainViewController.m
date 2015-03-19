@@ -296,11 +296,11 @@ BOOL musicIsPausedByUser = false;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                    ^{
                        
-                       NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
+                       NSURL * url =[NSURL URLWithString:[NSString stringWithFormat:@"http://shakey.korny.cc:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]];
                        
                        NSLog(@"Load New Data from Server");
                        
-                       NSLog(@"%@",[NSString stringWithFormat:@"http://192.168.137.117:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]);
+                       NSLog(@"%@",[NSString stringWithFormat:@"http://shakey.korny.cc:8000/location/lat/%f/long/%f/",locationManager.location.coordinate.latitude,locationManager.location.coordinate.longitude]);
                        
                        NSData * data=[NSData dataWithContentsOfURL:url];
                        
