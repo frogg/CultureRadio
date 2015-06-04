@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'artist',
     'spotifyData',
     'rest_framework',
+    'rest_framework_swagger',
     'webservice',
 )
 

@@ -41,7 +41,7 @@ function playTrack(track, spotify) {
 function nextTrack() {
 	trackCounter++;
 	
-	$.get("/location/lat/" + positionLatLng.lat() + "/long/" + positionLatLng.lng() + "/", null, "application/json")
+	$.get("/location/" + positionLatLng.lat() + "/" + positionLatLng.lng() + "/", null, "application/json")
 	.done(function(d) {
 		var track = d.result[trackCounter%d.result.length];
 
