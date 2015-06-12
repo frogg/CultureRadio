@@ -38,10 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'location',
     'artist',
+    'track',
     'spotifyData',
     'rest_framework',
     'rest_framework_swagger',
     'webservice',
+    'django_extensions',
+    'django.contrib.gis'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,10 +67,11 @@ WSGI_APPLICATION = 'pythonServer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'cultureradio',
         'USER': 'postgres',
-        'HOST': 'db',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
@@ -94,3 +98,4 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+SHELL_PLUS = "ipython"
