@@ -7,8 +7,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^location/',include('location.urls',namespace='location')),
-    url(r'^webservice/',include('webservice.urls',namespace='webservice')),
+    url(r'^location/', include('location.urls', namespace='location')),
+    url(r'^', include('webservice.urls', namespace='webservice')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
 )
 
 
